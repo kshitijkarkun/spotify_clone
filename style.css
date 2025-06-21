@@ -3,6 +3,7 @@ body{
     background-color: grey;
     color: aliceblue;
 }
+
 *{
     margin:0;
     padding: 0;
@@ -35,10 +36,14 @@ nav ul li{
     border: none;
     border-radius: 30px;
     background-color: rgb(52, 52, 52);
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 25px;
     padding: 7px;
     color: white;
+}
+.input{
+    flex-grow: 1;
 }
 .bottom{
     position: sticky;
@@ -51,7 +56,12 @@ nav ul li{
     flex-direction: column;
 }
 .container{
-    min-height: 80vh;
+    min-height: calc(100vh-110px);
+    height: auto;
+    overflow-y: hidden;
+    flex-wrap: wrap;
+    gap: 15px;
+    display: flex;
     background-color: black;
     color: white;
     display: flex;
@@ -79,7 +89,8 @@ nav ul li{
     color: white;
 }
 .lib{
-    width: 33.33%;
+    flex: 1;
+    min-width: 300px;
     background-color: rgb(52, 52, 52);
     border-radius: 10px;
     margin-right: 7.5px;
@@ -87,15 +98,30 @@ nav ul li{
     
 }
 .main{
-    width:33.33%;
+    flex: 1;
+    min-width: 300px;
     background : linear-gradient(rgb(169, 82, 169) , rgb(52, 52, 52));
     border-radius: 10px;
     margin-right: 7.5px;
     padding-left: 5px;
 }
 .art{
-    width: 33.33%;
-    padding-left: 5px;
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #121212, #232323);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: fit-content;
+    background: linear-gradient(to bottom, #121212, #282828); 
 }
 #title{
     padding: 20px;
@@ -119,12 +145,33 @@ nav ul li{
     padding: 20px;
 }
 .trending img{
-    height: 100px;
-    width: 100px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
 }
 .trending{
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
     display: flex;
     flex-direction: column;
+}
+.trending:hover{
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+.trending::-webkit-scrollbar{
+    width: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+.trending:hover:-webkit-scrollbar{
+    width: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 .songCard {
     display: flex;
@@ -132,14 +179,19 @@ nav ul li{
     padding:10px;
     align-items: center;
     cursor: pointer;
+    flex-wrap: nowrap;
 }
 .songCard img{
-    border-radius: 3px;
-    padding-right: 30px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
 }
 .songInfo{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 30px;
+    font-size: 2vw;
     cursor: pointer;
 }
 .yourLib i{
@@ -147,12 +199,13 @@ nav ul li{
    padding:5px;
 }
 .libCard {
+    width: 100%;
+    max-width: 50px;
+    height: auto;
     display: flex;
     flex-direction: row;
     padding:10px;
-    align-items: center;
-    
-    margin-top: 10px;
+    align-items: center;    
     margin-right: 10px;
     border-radius: 5px;
 }
@@ -170,19 +223,65 @@ nav ul li{
     font-size: 20px;
 }
 .libCard img{
-    width: 50px;
-    height: 50px;
+    width: 4vw;
+    height: 4vw;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 100%;
     margin-right: 30px;
 }
 .currentSongImg{
-    background-color: red;
-    width: 95%;
-    height: 95%;
+    background-color: #1e1e1e; 
+    width: 90%;
+    max-width: 220px;
+    height: 90%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    padding: 20px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    text-align: center;
 }
 .currentSongImg img{
     padding: 30px;
+    width: 80%;
+    max-width: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+}
+.currentSongImg h3{
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.currentSongImg p{
+    font-size: 1rem;
+    color: #b3b3b3;
+    text-align: center;
+    margin-top: 0; 
+}
+.yourLib{
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255 ,255 , 0.5) transparent;
+}
+.yourLib ::-webkit-scrollbar{
+    width: 0;
+}
+.yourLib:hover::-webkit-scrollbar{
+    width: 6px;
+}
+.yourLib:hover{
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255 ,255 , 0.5) transparent;
 }

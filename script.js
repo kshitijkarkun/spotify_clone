@@ -3,14 +3,15 @@
 let songIndex =0;
 let audioElement = new Audio('ncs/Prong, BOTCASH, Justin OH - Ghost Of Me [NCS Release].mp3');
 let play=document.getElementById("play");
+let currentSongDisplay=document.querySelector('.currentSongImg');
 let progressbar=document.getElementById("progressbar");
 
 let songs=[
-    {songName:"Prong, BOTCASH, Justin OH - Ghost Of Me [NCS Release]", filePath:"ncs/1.mp3", coverPath:"ghost of me.jpeg"},
-    {songName:"LULO, kaya! - Hit The Ground [NCS Release]", filePath:"ncs/2.mp3", coverPath:"hit the ground.jpeg"},
-    {songName:"X972, sk3tch01, MXZI - Montagem Toma [NCS Release]", filePath:"ncs/3.mp3", coverPath:"montagem.jpeg"},
-    {songName:"Warriyo, LXNGVX - Mortals Funk Remix [NCS Release]", filePath:"ncs/4.mp3", coverPath:"mortals funk.jpeg"},
-    {songName:"LXNGVX - Royalty Funk [NCS Release]", filePath:"ncs/5.mp3", coverPath:"royalty funk.jpeg"},
+    {songName:"Prong, BOTCASH, Justin OH - Ghost Of Me [NCS Release]", filePath:"ncs/1.mp3", coverPath:"1.jpg"},
+    {songName:"LULO, kaya! - Hit The Ground [NCS Release]", filePath:"ncs/2.mp3", coverPath:"2.jpg"},
+    {songName:"X972, sk3tch01, MXZI - Montagem Toma [NCS Release]", filePath:"ncs/3.mp3", coverPath:"3.jpg"},
+    {songName:"Warriyo, LXNGVX - Mortals Funk Remix [NCS Release]", filePath:"ncs/4.mp3", coverPath:"4.jpg"},
+    {songName:"LXNGVX - Royalty Funk [NCS Release]", filePath:"ncs/5.mp3", coverPath:"5.jpg"},
     {songName:"ksma", filePath:"ncs/6.mp3", coverPath:"al1.jpeg"},
     {songName:"ksma", filePath:"ncs/7.mp3", coverPath:"al1.jpeg"},
     {songName:"ksma", filePath:"ncs/8.mp3", coverPath:"al1.jpeg"},
@@ -46,6 +47,14 @@ const makeplay =()=>{
     play.classList.remove('fa-circle-play');
     play.classList.add('fa-circle-pause');
 }
+function updateCurrentlyPlaying(index) {
+    currentSongDisplay.innerHTML = `
+        <img src="img/${songs[index-1].coverPath}" alt="${songs[index].songName}" width="150" height="150" style="border-radius:10px;">
+        <h3 style="margin-top: 10px; text-align: center;">${songs[index].songName}</h3>
+        <p>Now Playing</p>
+    `;
+}
+
 Array.from(document.getElementsByClassName('songCard')).forEach((Element) => {
     Element.addEventListener('click', (e)=>{
         makeplay();
@@ -56,6 +65,7 @@ Array.from(document.getElementsByClassName('songCard')).forEach((Element) => {
         audioElement.play();
         play.classList.remove('fa-circle-play');
         play.classList.add('fa-circle-pause');
+        updateCurrentlyPlaying(songIndex);
     })
 });
 document.getElementById('forward').addEventListener('click',()=>{
@@ -70,6 +80,7 @@ document.getElementById('forward').addEventListener('click',()=>{
     audioElement.play();
     play.classList.remove('fa-circle-play');
     play.classList.add('fa-circle-pause');
+    updateCurrentlyPlaying(songIndex);
 
 })
 document.getElementById('previous').addEventListener('click', ()=>{
@@ -84,4 +95,5 @@ document.getElementById('previous').addEventListener('click', ()=>{
     audioElement.play();
     play.classList.remove('fa-circle-play');
     play.classList.add('fa-circle-pause');
+    updateCurrentlyPlaying(songIndex);
 })
