@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="logo"><img src="1.jpg"></li>
+            <li class="home"><button id="homebtt">
+                <i class="fa-solid fa-house"></i>
+            </button></li>
+            <Li class="input"><input type="text" placeholder="What do you want to play?"></Li>
+            <li>home</li>
+            <li>about</li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="lib">
+            <div class="topnav">
+                <h1 id="title">Your library</h1>
+                <button id="create">
+                    <i class="fa-solid fa-plus"></i> Create
+                </button>
+            </div>
+            <div class="yourLib">
+                <div class="libCard">
+                    <i class="fa-solid fa-heart"></i>
+                    <div class="libInfo">
+                        <p>Liked Songs</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="Naamcheen.webp">
+                    <div class="libInfo">
+                        <p>Hype Songs</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al1.jpeg">
+                    <div class="libInfo">
+                        <p>All Time Low</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al2.jpeg">
+                    <div class="libInfo">
+                        <p>Sad</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al3.jpeg">
+                    <div class="libInfo">
+                        <p>Dance Time</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al4.jpeg">
+                    <div class="libInfo">
+                        <p>2012</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al5.jpeg">
+                    <div class="libInfo">
+                        <p>Rap</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al6.jpeg">
+                    <div class="libInfo">
+                        <p>POP!</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="al7.jpeg">
+                    <div class="libInfo">
+                        <p>taylor</p>
+                    </div>
+                </div>
+                <div class="libCard">
+                    <img src="Dl91.jpeg">
+                    <div class="libInfo">
+                        <p>DL91</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <h1 id="heading">Trending Songs</h1>
+            <div class="trending">
+                <div class="songCard" id="1">
+                    <img src="img/ghost of me.jpg">
+                    <div class="songInfo">
+                        <p>Ghost Of Me<br></p>
+                        <p>Prong, BOTCASH, Justin OH</p>
+                    </div>
+                </div>
+                <div class="songCard" id="2">
+                    <img src="img/hit the ground.jpg">
+                    <div class="songInfo">
+                        <p>Hit The Ground</p>
+                        <p>LULO, Kaya!</p>
+                    </div>
+                </div>
+                <div class="songCard" id="3">
+                    <img src="img/montagem toma.jpg">
+                    <div class="songInfo">
+                        <p>Montagem<br></p>
+                        <p>X972, sk3tch01, MXZI</p>
+                    </div>
+                </div>
+                <div class="songCard" id="4">
+                    <img src="img/mortals funk remix.jpg">
+                    <div class="songInfo">
+                        <p>Mortals Funch Remix<br></p>
+                        <p>Warriyo, LXNGVX</p>
+                    </div>
+                </div>
+                <div class="songCard" id="5">
+                    <img src="img/royalty funk.jpg">
+                    <div class="songInfo">
+                        <p>Royalty Funk<br></p>
+                        <p>LXNGVX</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="art">
+            <h1>Currently Playing</h1>
+            <div class="currentSongImg">
+                <img src="img/ghost of me.jpg">
+                <h1>Ghost of me</h1>
+                <p>Prong, BOTCASH, Justin OH</p>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="icon">
+            <i class="fa-solid fa-shuffle"></i>
+            <i id="previous" class="fa-solid fa-backward-step"></i>
+            <i class="fa-solid fa-circle-play" id="play"></i>
+            <i id="forward" class="fa-solid fa-forward-step"></i>
+            <i class="fa-solid fa-repeat"></i>
+        </div>
+        <input type="range" name="range" id="progressbar" min="0" max="100" value="0">
+    </div>
+    <script src="https://kit.fontawesome.com/db4894c4d2.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>

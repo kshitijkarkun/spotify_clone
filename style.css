@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&display=swap');
+body{
+    background-color: grey;
+    color: aliceblue;
+}
+*{
+    margin:0;
+    padding: 0;
+}
+nav{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+nav ul{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height:65px;
+    background-color: black;
+}
+#homebtt{
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 6px;
+    background-color: rgb(52, 52, 52);
+    color: white;
+    cursor: pointer;
+}
+.logo img{
+    width: 30px;
+}
+nav ul li{
+    padding: 12px;
+}
+.input input {
+    border: none;
+    border-radius: 30px;
+    background-color: rgb(52, 52, 52);
+    width: 400px;
+    height: 25px;
+    padding: 7px;
+    color: white;
+}
+.bottom{
+    position: sticky;
+    height: 110px;
+    background-color: black;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container{
+    min-height: 80vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#progressbar{
+    width: 50vw;
+    text-align: center;
+    background: grey;
+    border-radius: 20px;
+    height: 5px;
+}
+.icon{
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+.icon i{
+    padding-left:15px;
+    padding-right: 15px;
+    color: grey;
+    cursor: pointer;
+}
+#play{
+    font-size: 40px;
+    color: white;
+}
+.lib{
+    width: 33.33%;
+    background-color: rgb(52, 52, 52);
+    border-radius: 10px;
+    margin-right: 7.5px;
+    padding-left: 5px;
+    
+}
+.main{
+    width:33.33%;
+    background : linear-gradient(rgb(169, 82, 169) , rgb(52, 52, 52));
+    border-radius: 10px;
+    margin-right: 7.5px;
+    padding-left: 5px;
+}
+.art{
+    width: 33.33%;
+    padding-left: 5px;
+}
+#title{
+    padding: 20px;
+
+}
+.topnav{
+    display: flex;
+    justify-content: space-between;
+}
+#create{
+    margin-right: 20px;
+    margin-top: 10px;
+    background-color: rgb(73, 73, 73);
+    border: none;
+    border-radius: 20px;
+    padding: 12px;
+    color: white;
+    cursor: pointer;
+}
+#heading{
+    padding: 20px;
+}
+.trending img{
+    height: 100px;
+    width: 100px;
+}
+.trending{
+    display: flex;
+    flex-direction: column;
+}
+.songCard {
+    display: flex;
+    flex-direction: row;
+    padding:10px;
+    align-items: center;
+    cursor: pointer;
+}
+.songCard img{
+    border-radius: 3px;
+    padding-right: 30px;
+}
+.songInfo{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    cursor: pointer;
+}
+.yourLib i{
+   font-size: 25px;
+   padding:5px;
+}
+.libCard {
+    display: flex;
+    flex-direction: row;
+    padding:10px;
+    align-items: center;
+    
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.libCard i{
+    border-radius: 5px;
+    margin-right: 30px;
+    background: linear-gradient(lightpink, pink);
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    
+}
+.libInfo{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+.libCard img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-right: 30px;
+}
+.currentSongImg{
+    background-color: red;
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.currentSongImg img{
+    padding: 30px;
+}
