@@ -5,43 +5,27 @@ let audioElement = new Audio('ncs/Prong, BOTCASH, Justin OH - Ghost Of Me [NCS R
 let play=document.getElementById("play");
 let currentSongDisplay=document.querySelector('.currentSongImg');
 let progressbar=document.getElementById("progressbar");
+let artSection = document.querySelector('.art');
+
 let songs=[
     {songName:"Prong, BOTCASH, Justin OH - Ghost Of Me [NCS Release]", filePath:"ncs/1.mp3", coverPath:"1.jpg"},
     {songName:"LULO, kaya! - Hit The Ground [NCS Release]", filePath:"ncs/2.mp3", coverPath:"2.jpg"},
     {songName:"X972, sk3tch01, MXZI - Montagem Toma [NCS Release]", filePath:"ncs/3.mp3", coverPath:"3.jpg"},
     {songName:"Warriyo, LXNGVX - Mortals Funk Remix [NCS Release]", filePath:"ncs/4.mp3", coverPath:"4.jpg"},
-    {songName:"LXNGVX - Royalty Funk [NCS Release]", filePath:"ncs/5.mp3", coverPath:"5.jpg"},
-    {songName:"ksma", filePath:"ncs/6.mp3", coverPath:"al1.jpeg"},
-    {songName:"ksma", filePath:"ncs/7.mp3", coverPath:"al1.jpeg"},
-    {songName:"ksma", filePath:"ncs/8.mp3", coverPath:"al1.jpeg"},
-    {songName:"ksma", filePath:"ncs/9.mp3", coverPath:"al1.jpeg"},
-    {songName:"ksma", filePath:"ncs/10.mp3", coverPath:"al1.jpeg"},
+    {songName:"LXNGVX - Royalty Funk [NCS Release]", filePath:"ncs/5.mp3", coverPath:"5.jpg"}
 ]
 //play pause 
 play.addEventListener('click', () => {
-    if (!previewPlayer.paused && !previewPlayer.ended && previewPlayer.src) {
-        // If preview is playing, pause it
-        previewPlayer.pause();
-        play.classList.remove('fa-circle-pause');
-        play.classList.add('fa-circle-play');
-    } else if (previewPlayer.src) {
-        // If preview is loaded but not playing
-        audioElement.pause(); // pause local audio just in case
-        previewPlayer.play();
+    if (audioElement.paused || audioElement.currentTime <= 0) {
+        audioElement.play();
         play.classList.remove('fa-circle-play');
         play.classList.add('fa-circle-pause');
+        artSection.classList.add('playing');
     } else {
-        // Handle local audio
-        if (audioElement.paused || audioElement.currentTime <= 0) {
-            previewPlayer.pause(); // pause preview just in case
-            audioElement.play();
-            play.classList.remove('fa-circle-play');
-            play.classList.add('fa-circle-pause');
-        } else {
-            audioElement.pause();
-            play.classList.remove('fa-circle-pause');
-            play.classList.add('fa-circle-play');
-        }
+        audioElement.pause();
+        play.classList.remove('fa-circle-pause');
+        play.classList.add('fa-circle-play');
+        artSection.classList.remove('playing');
     }
 });
 
@@ -75,6 +59,7 @@ Array.from(document.getElementsByClassName('songCard')).forEach((Element) => {
         audioElement.src=`ncs/${songIndex}.mp3`;
         audioElement.currentTime=0;
         audioElement.play();
+        artSection.classList.add('playing');
         play.classList.remove('fa-circle-play');
         play.classList.add('fa-circle-pause');
         updateCurrentlyPlaying(songIndex);
@@ -173,11 +158,13 @@ function displaySearchResults(tracks) {
             if (track.preview) {
                 // Stop local file playback if running
                 audioElement.pause();
+                artSection.classList.add('playing');
+
         
-                previewPlayer.src = track.preview;
-                previewPlayer.currentTime = 0;
-                previewPlayer.play();
-                previewPlayer.style.display = "block";
+                // Use main audio element instead of previewPlayer
+                audioElement.src = track.preview;
+                audioElement.currentTime = 0;
+                audioElement.play();
         
                 // 🔁 Change bottom play icon to pause
                 play.classList.remove('fa-circle-play');
@@ -193,8 +180,7 @@ function displaySearchResults(tracks) {
                 alert("No preview available for this song.");
             }
         });
-        
-        
+           
     });
 }
 previewPlayer.addEventListener("timeupdate", () => {
