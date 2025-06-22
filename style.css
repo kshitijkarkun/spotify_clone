@@ -42,8 +42,12 @@ nav ul li{
     padding: 7px;
     color: white;
 }
-.input{
-    flex-grow: 1;
+#searchBtn{
+    background-color: #232323;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    color: white;
 }
 .bottom{
     position: sticky;

@@ -5,7 +5,6 @@ let audioElement = new Audio('ncs/Prong, BOTCASH, Justin OH - Ghost Of Me [NCS R
 let play=document.getElementById("play");
 let currentSongDisplay=document.querySelector('.currentSongImg');
 let progressbar=document.getElementById("progressbar");
-
 let songs=[
     {songName:"Prong, BOTCASH, Justin OH - Ghost Of Me [NCS Release]", filePath:"ncs/1.mp3", coverPath:"1.jpg"},
     {songName:"LULO, kaya! - Hit The Ground [NCS Release]", filePath:"ncs/2.mp3", coverPath:"2.jpg"},
@@ -19,20 +18,33 @@ let songs=[
     {songName:"ksma", filePath:"ncs/10.mp3", coverPath:"al1.jpeg"},
 ]
 //play pause 
-play.addEventListener('click',()=>{
-    if(audioElement.paused || audioElement.currentTime<=0){
-        audioElement.play();
-        play.classList.remove('fa-circle-play');
-        play.classList.add('fa-circle-pause');
-    }
-    else{
-        audioElement.pause();
+play.addEventListener('click', () => {
+    if (!previewPlayer.paused && !previewPlayer.ended && previewPlayer.src) {
+        // If preview is playing, pause it
+        previewPlayer.pause();
         play.classList.remove('fa-circle-pause');
         play.classList.add('fa-circle-play');
-        
+    } else if (previewPlayer.src) {
+        // If preview is loaded but not playing
+        audioElement.pause(); // pause local audio just in case
+        previewPlayer.play();
+        play.classList.remove('fa-circle-play');
+        play.classList.add('fa-circle-pause');
+    } else {
+        // Handle local audio
+        if (audioElement.paused || audioElement.currentTime <= 0) {
+            previewPlayer.pause(); // pause preview just in case
+            audioElement.play();
+            play.classList.remove('fa-circle-play');
+            play.classList.add('fa-circle-pause');
+        } else {
+            audioElement.pause();
+            play.classList.remove('fa-circle-pause');
+            play.classList.add('fa-circle-play');
+        }
     }
+});
 
-})
 //listen to events
 audioElement.addEventListener('timeupdate', ()=>{
     //update seekbar
@@ -97,3 +109,100 @@ document.getElementById('previous').addEventListener('click', ()=>{
     play.classList.add('fa-circle-pause');
     updateCurrentlyPlaying(songIndex);
 })
+//search button with api 
+document.getElementById("searchBtn").addEventListener("click", () => {
+    let query = document.getElementById("searchInput").value.trim();
+    if (!query) return;
+
+    let apiURL = `https://api.codetabs.com/v1/proxy/?quest=https://api.deezer.com/search?q=${query}`;
+
+    fetch(apiURL)
+        .then(res => res.json())
+        .then(data => {
+            const trendingSection = document.querySelector(".trending"); // hide trending
+            const searchResults = document.getElementById("searchResults");
+            const searchHeading = document.getElementById("searchHeading");
+
+            if (!searchResults || !searchHeading || !trendingSection) {
+                console.error("Required DOM elements not found");
+                return;
+            }
+
+            searchResults.innerHTML = "";
+            searchHeading.style.display = "block";
+            trendingSection.style.display = "none";
+
+            if (!data.data || data.data.length === 0) {
+                searchResults.innerHTML = "<p>No results found.</p>";
+                return;
+            }
+
+            // ✅ Show search results & enable playback using your function
+            displaySearchResults(data.data.slice(0, 10));
+        })
+        .catch(err => {
+            console.error("API fetch failed", err);
+        });
+});
+
+//playing from search logic
+const previewPlayer = document.getElementById("previewPlayer");
+
+function displaySearchResults(tracks) {
+    const resultsDiv = document.getElementById("searchResults");
+    resultsDiv.innerHTML = ""; // clear previous results
+    document.getElementById("searchHeading").style.display = "block";
+
+    tracks.forEach((track) => {
+        const card = document.createElement("div");
+        card.className = "songCard";
+
+        const img = document.createElement("img");
+        img.src = track.album.cover_medium;
+
+        const info = document.createElement("div");
+        info.className = "songInfo";
+        info.innerHTML = `<p>${track.title}</p><p>${track.artist.name}</p>`;
+
+        card.appendChild(img);
+        card.appendChild(info);
+        resultsDiv.appendChild(card);
+
+        // 🎵 Add click to play preview
+        card.addEventListener("click", () => {
+            if (track.preview) {
+                // Stop local file playback if running
+                audioElement.pause();
+        
+                previewPlayer.src = track.preview;
+                previewPlayer.currentTime = 0;
+                previewPlayer.play();
+                previewPlayer.style.display = "block";
+        
+                // 🔁 Change bottom play icon to pause
+                play.classList.remove('fa-circle-play');
+                play.classList.add('fa-circle-pause');
+        
+                // 🎨 Update Currently Playing section
+                currentSongDisplay.innerHTML = `
+                    <img src="${track.album.cover_medium}" alt="${track.title}" width="150" height="150" style="border-radius:10px;">
+                    <h3 style="margin-top: 10px; text-align: center;">${track.title}</h3>
+                    <p style="text-align: center;">${track.artist.name}</p>
+                `;
+            } else {
+                alert("No preview available for this song.");
+            }
+        });
+        
+        
+    });
+}
+previewPlayer.addEventListener("timeupdate", () => {
+    const progress = parseInt((previewPlayer.currentTime / previewPlayer.duration) * 100);
+    progressbar.value = progress;
+});
+progressbar.addEventListener("input", () => {
+    if (!previewPlayer.paused) {
+        previewPlayer.currentTime = (progressbar.value * previewPlayer.duration) / 100;
+    }
+});
